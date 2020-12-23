@@ -1,38 +1,162 @@
-.App {
-  text-align: center;
+.hero {
+
+  background-color: teal;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  min-height: 600px;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main-header .showcase {
+  padding-top: 110px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.scroll-icon {
+  position: absolute;
+  bottom: 5%;
+  left: 47%;
+  opacity: 0.5;
 }
 
-.App-header {
-  background-color: #282c34;
+.box {
+  padding: 40px 10px !important;
+}
+
+.box h4 {
+  padding-bottom: 30px;
+}
+
+.section-boxes .row {
+  margin-bottom: 0 !important;
+}
+
+.section-contact {
+  position: relative;
+}
+
+.section-contact .card-panel {
+  position: relative;
+  z-index: 1;
+}
+
+
+.front-idea {
+  height: auto;
+  min-height: 500px;
+  padding: 50px 0px;
+}
+
+.cta {
+  height: auto;
+  min-height: 400px;
+}
+
+.cardB {
+  margin: 30px 0px;
+}
+
+.actBt {
+  height: 300px;
+  min-height: 300px;
+  border-radius: 10px;
+}
+
+.frontM {
+  margin: 7vw;
+}
+
+#root {
+  display: flex;
   min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.leaflet-container {
+  height: 60vh;
+  width: 100%;
+}
+
+.top {
+
+  height: auto;
+}
+
+#modal3 {
+  padding: 1rem;
+}
+
+#table-divider {
+  height: 5px;
+}
+
+#CreateH {
+  margin: 15px 0px 15px 10px;
+}
+
+#card-texts {
+  max-height: 60vh;
+  overflow-y: auto
+}
+
+.p-chats{
+  margin: 10px
+}
+
+.chat-message{
+  /* background-color: lightblue; */
+  padding: 5px 10px 18px 10px;
+  margin: 5px;
+  border-radius: 10px
+}
+
+.span-for-chat {
+  background-color: white;
+  border-radius: 20px;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.chat-title{
+  padding: 5px 15px 5px 15px;
+  border-radius: 20px;
+}
+
+.chat-header {
+  margin-bottom: 30px
+}
+
+.newMessageForm {
+  margin-bottom: 30px;
+  position: sticky;
+}
+
+.messagesArea{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.mFormCont{
+  position: sticky
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#modal1{
+  padding: 0;
+}
+
+.modal-content {
+  padding: 4px 20px 4px 20px !important;
+}
+
+.modalsLI {
+  margin: 0px 10px 0px 10px;
+}
+
+.dashB {
+  max-height: 90vh;
+  overflow-y: auto
 }

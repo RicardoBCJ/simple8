@@ -1,0 +1,19 @@
+export const LOAD_TODOS = "LOAD_TODOS";
+export const ADD_TODO = "ADD_TODO";
+export const TOGGLE_TODO = "TOGGLE_TODO";
+export const DELETE_TODO = "DELETE_TODO";
+
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const LOAD_USERS = "LOAD_USER";
+
+export const LOAD_HELP_REQUESTS = "LOAD_HELP_REQUESTS";
+export const LOAD_HELP_REQUEST = "LOAD_HELP_REQUEST";
+export const ADD_HELP_REQUESTS = "ADD_HELP_REQUESTS";
+export const UPDATE_HELP_REQUESTS = "UPDATE_HELP_REQUESTS";
+export const DELETE_HELP_REQUESTS = "DELETE_HELP_REQUESTS";
+export const JOIN_HELP_REQUEST = "JOIN_HELP_REQUEST";
+
+
+export const LOAD_MARKERS = "LOAD_MARKERS";
+export const REMOVE_MARKER = "REMOVE_MARKER";
