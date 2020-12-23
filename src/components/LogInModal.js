@@ -8,7 +8,6 @@ import {
   Link,
   Switch,
   Redirect,
-  useHistory,
 } from "react-router-dom";
 import { Modal, Button } from "react-materialize";
 
@@ -28,9 +27,7 @@ class LogInUser extends Component {
     });
   };
 
-  navigateToHome() {
-    useHistory().push("/dashboard");
-  }
+
 
   validate = () => {
     // let passwordError=""
