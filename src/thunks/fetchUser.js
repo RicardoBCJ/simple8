@@ -22,7 +22,6 @@ export function loginUserFetch(userInfo) {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         if (data.status == "error") {
           //alert(data.message);
           M.toast({ html: data.message });
@@ -32,13 +31,11 @@ export function loginUserFetch(userInfo) {
           dispatch(loginUser(user_json));
           M.toast({ html: "loged in" });
           changeURL();
-          console.log(changeURL());
         }
       });
 }
 
 export function createUser(userinfo, image) {
-  console.log(image)
   return (dispatch) =>
     fetch(`${API_ROOT}/signup`, {
       method: "POST",
@@ -56,15 +53,10 @@ export function createUser(userinfo, image) {
         } else {
           localStorage.setItem("token", data.jwt);
           dispatch(loginUser(data.user));
-          console.log(data.user);
-          console.log(data.user.id);
           const userFR = data.user.id;
           var body = new FormData();
           body.append("picture[attachment]", image);
           body.append("picture[user_id]", data.user.id);
-          for (var pair of body.entries()) {
-            console.log(pair[0] + ", " + pair[1]);
-          }
           fetch(`${API_ROOT}/pictures.json`, {
             method: "post",
             body: body,
@@ -91,7 +83,6 @@ export function fetchLoggedInUser() {
             alert(data.status == "error");
             localStorage.removeItem("token");
           } else {
-            console.log(data);
             dispatch(loginUser(data));
           }
         });
@@ -115,6 +106,5 @@ export function uploadPhoto(photo) {
     .then((res) => res.json())
     .then((data) => {
       // do something with the returned data
-      console.log(data);
     });
 }
