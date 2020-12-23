@@ -3,8 +3,6 @@ import { ActionCable } from "react-actioncable-provider";
 import { API_ROOT, HEADERS } from "../constants";
 import Cable from "./Cable";
 import MessagesArea from "./MessagesArea";
-import MessagesArea2 from "./MessagesArea2";
-import NewMessageForm2 from "./NewMessageForm2";
 import axios from "axios";
 import { connect } from "react-redux";
 
