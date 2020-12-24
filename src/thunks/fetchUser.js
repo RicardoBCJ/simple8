@@ -2,7 +2,7 @@ import { loginUser, loadUsers } from "../actions/userActions";
 import axios from "axios";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { API_ROOT } from "../constants/index";
-import store from "./store";
+import store from ".././store";
 
 function changeURL() {
   var theURL = window.location.pathname;
