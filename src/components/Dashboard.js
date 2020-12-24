@@ -4,6 +4,7 @@ import Panel from "./Panel";
 import axios from "axios";
 import { getHelpRequests } from "../thunks/axiosHelpRequests";
 import { connect } from "react-redux";
+import { API_ROOT } from "../constants/index"
 
 export class Dashboard extends Component {
   componentWillMount() {
@@ -11,9 +12,9 @@ export class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios.get("/api/v1/users").then((res) => {
+    axios.get(`${API_ROOT}/api/users`).then((res) => {
     });
-    axios.get("/api/v1/help_requests").then((res) => {
+    axios.get(`${API_ROOT}/api/help_requests`).then((res) => {
     });
   }
   render() {
