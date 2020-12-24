@@ -165,7 +165,7 @@ export class HelpRequestModal extends Component {
               id="textarea2"
             >
             </textarea>
-            <label for="textarea2">description</label>
+            <label htmlFor="textarea2">description</label>
           </div>
           <br/>
           <a

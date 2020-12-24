@@ -213,8 +213,6 @@ const mapConversations = (conversations, handleClick, userID) => {
   });
 };
 
-const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConversationsList2);
+export default ConversationsList2;
