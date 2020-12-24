@@ -2,6 +2,7 @@ import { loginUser, loadUsers } from "../actions/userActions";
 import axios from "axios";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { API_ROOT } from "../constants/index";
+import store from "./store";
 
 function changeURL() {
   var theURL = window.location.pathname;
@@ -28,9 +29,8 @@ export function loginUserFetch(userInfo) {
         } else {
           let user_json = JSON.parse(data.user);
           localStorage.setItem("token", data.jwt);
-          dispatch(loginUser(user_json));
+          store.dispatch(loginUser(user_json));
           M.toast({ html: "loged in" });
-          changeURL();
         }
       });
 }
@@ -52,7 +52,7 @@ export function createUser(userinfo, image) {
           alert(data.error);
         } else {
           localStorage.setItem("token", data.jwt);
-          dispatch(loginUser(data.user));
+          store.dispatch(loginUser(data.user));
           const userFR = data.user.id;
           var body = new FormData();
           body.append("picture[attachment]", image);
@@ -83,28 +83,11 @@ export function fetchLoggedInUser() {
             alert(data.status == "error");
             localStorage.removeItem("token");
           } else {
-            dispatch(loginUser(data));
+            store.dispatch(loginUser(data));
           }
         });
     }
   };
 }
 
-export function loadUsersAxios() {
-  return (dispatch) => {};
-}
 
-export function uploadPhoto(photo) {
-  const formData = new FormData();
-  formData.append("file", photo);
-
-  // configure your fetch url appropriately
-  fetch(`${API_ROOT}/images/${this.props.profile.id}`, {
-    method: "PATCH",
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      // do something with the returned data
-    });
-}
