@@ -36,88 +36,73 @@ export class Panel extends Component {
   render() {
     return (
       <Fragment>
-        <Card
-                className="blue-grey lighten-1 dashB"
-              
-                title="Your Dashboard"
+        <Card className="blue-grey lighten-1 dashB" title="Your Dashboard">
+          {this.props.helpReqs && this.props.userId && this.props.userName ? (
+            <Tabs className="tab-demo z-depth-1 tabs-fixed-width">
+              <Tab
+                active
+                options={{
+                  duration: 300,
+                  onShow: null,
+                  responsiveThreshold: Infinity,
+                  swipeable: false,
+                }}
+                title="Help Requests"
               >
-        {this.props.helpReqs && this.props.userId && this.props.userName ?
-          
-          <Tabs className="tab-demo z-depth-1 tabs-fixed-width">
-            <Tab
-              active
-              options={{
-                duration: 300,
-                onShow: null,
-                responsiveThreshold: Infinity,
-                swipeable: false,
-              }}
-              title="Help Requests"
-            >
-              <UsersHelpRequests
-                    UserId={this.props.userId}
-                    UserName={this.props.userName}
-                    UserHelpReqs={this.props.helpReqs}
-                  />
-                  {this.props.userId >= 0 ? (
-                    <HelpRequestModal userId={this.props.userId} />
-                  ) : <div><h2>Please log in to request help</h2></div>}
-              
-            </Tab>
+                <UsersHelpRequests
+                  UserId={this.props.userId}
+                  UserName={this.props.userName}
+                  UserHelpReqs={this.props.helpReqs}
+                />
+                {this.props.userId >= 0 ? (
+                  <HelpRequestModal userId={this.props.userId} />
+                ) : (
+                  <div>
+                    <h2>Please log in to request help</h2>
+                  </div>
+                )}
+              </Tab>
 
-            <Tab
-              
-              options={{
-                duration: 300,
-                onShow: null,
-                responsiveThreshold: Infinity,
-                swipeable: false,
-              }}
-              title="Volunteered to help"
-            >
-              
-              
-              <OtherHelpRequests
-                    UserId={this.props.userId}
-                    UserName={this.props.userName}
-                    UserHelpReqs={this.props.helpReqs}
-                  />
+              <Tab
+                options={{
+                  duration: 300,
+                  onShow: null,
+                  responsiveThreshold: Infinity,
+                  swipeable: false,
+                }}
+                title="Volunteered to help"
+              >
+                <OtherHelpRequests
+                  UserId={this.props.userId}
+                  UserName={this.props.userName}
+                  UserHelpReqs={this.props.helpReqs}
+                />
+              </Tab>
 
-              
-            </Tab>
-
-            <Tab
-              
-              options={{
-                duration: 300,
-                onShow: null,
-                responsiveThreshold: Infinity,
-                swipeable: false,
-              }}
-              title="Available Chats"
-            >
-              
-              
+              <Tab
+                options={{
+                  duration: 300,
+                  onShow: null,
+                  responsiveThreshold: Infinity,
+                  swipeable: false,
+                }}
+                title="Available Chats"
+              >
                 <ConversationsList2
-                    CurrentUser={this.props.userId}
-                    CurrentUserName={this.props.userName}
-                  />
-
-              
-            </Tab>
-          </Tabs> :
-          <Row>
-            <Col s={12}>
-              <ProgressBar />
-            </Col>
-          </Row>
-        
-        }
-
-      
+                  CurrentUser={this.props.userId}
+                  CurrentUserName={this.props.userName}
+                />
+              </Tab>
+            </Tabs>
+          ) : (
+            <Row>
+              <Col s={12}>
+                <ProgressBar />
+              </Col>
+            </Row>
+          )}
         </Card>
       </Fragment>
-      
     );
   }
 }

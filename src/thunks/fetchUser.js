@@ -1,16 +1,7 @@
-import { loginUser, loadUsers } from "../actions/userActions";
-import axios from "axios";
+import { loginUser } from "../actions/userActions";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { API_ROOT } from "../constants/index";
-import store from ".././store";
 
-function changeURL() {
-  var theURL = window.location.pathname;
-  // eslint-disable-next-line no-restricted-globals
-  return history.pushState({}, "", "dashboard#test4");
-  //theURL.replace("/#modal2", "/dashboard");
-  //Set URL
-}
 
 export function loginUserFetch(userInfo) {
   return (dispatch) =>
@@ -29,7 +20,7 @@ export function loginUserFetch(userInfo) {
         } else {
           let user_json = JSON.parse(data.user);
           localStorage.setItem("token", data.jwt);
-          store.dispatch(loginUser(user_json));
+          dispatch(loginUser(user_json));
           M.toast({ html: "loged in" });
         }
       });
@@ -52,7 +43,7 @@ export function createUser(userinfo, image) {
           alert(data.error);
         } else {
           localStorage.setItem("token", data.jwt);
-          store.dispatch(loginUser(data.user));
+          dispatch(loginUser(data.user));
           const userFR = data.user.id;
           var body = new FormData();
           body.append("picture[attachment]", image);
@@ -83,7 +74,7 @@ export function fetchLoggedInUser() {
             alert(data.status == "error");
             localStorage.removeItem("token");
           } else {
-            store.dispatch(loginUser(data));
+            dispatch(loginUser(data));
           }
         });
     }
