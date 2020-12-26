@@ -120,10 +120,21 @@ class ConversationsList2 extends React.Component {
     const conversation = conversations.find(
       (conversation) => conversation.id === message.conversation_id
     );
-    console.log(message)
-    var indexor = conversation.messages.indexOf(message)
-    console.log(indexor)
     conversation.messages = [...conversation.messages, message];
+    function removeDuplicates(originalArray, prop) {
+      var newArray = [];
+      var lookupObject  = {};
+   
+      for(var i in originalArray) {
+         lookupObject[originalArray[i][prop]] = originalArray[i];
+      }
+   
+      for(i in lookupObject) {
+          newArray.push(lookupObject[i]);
+      }
+       return newArray;
+   }
+   conversation.messages = removeDuplicates(conversation.messages, "id")
     this.setState({ conversations });
   };
 
