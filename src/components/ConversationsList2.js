@@ -121,7 +121,7 @@ class ConversationsList2 extends React.Component {
       (conversation) => conversation.id === message.conversation_id
     );
     console.log(message)
-    var indexor = conversation.messages.indexOf(messages)
+    var indexor = conversation.messages.indexOf(message)
     console.log(indexor)
     conversation.messages = [...conversation.messages, message];
     this.setState({ conversations });
