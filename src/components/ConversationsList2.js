@@ -114,11 +114,13 @@ class ConversationsList2 extends React.Component {
   };
 
   handleReceivedMessage = (response) => {
+    console.log(response)
     const { message } = response;
     const conversations = [...this.state.conversations];
     const conversation = conversations.find(
       (conversation) => conversation.id === message.conversation_id
     );
+    console.log(message)
     conversation.messages = [...conversation.messages, message];
     this.setState({ conversations });
   };

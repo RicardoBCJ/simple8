@@ -47,14 +47,14 @@ const orderedMessages = (Messages, user) => {
           className="chat-message  teal lighten-4 right-align"
         >
           <h5 className="teal-text text-darken-5">{message.author}</h5>
-          <p>{message.text}</p>
+          <p key={message.id}>{message.text}</p>
         </div>
       );
     } else {
       return (
         <div key={message.id} className="chat-message  blue lighten-4">
           <h5 className="blue-text text-darken-5">{message.author}</h5>
-          <p>{message.text}</p>
+          <p key={message.id}>{message.text}</p>
         </div>
       );
     }
