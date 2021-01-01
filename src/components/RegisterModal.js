@@ -7,19 +7,20 @@ import axios from "axios";
 import { API_ROOT } from "../constants/index";
 
 class RegisterModal extends Component {
- state = {
-      user_id: "",
-      date: "",
-      name: "",
-      lastname: "",
-      email: "",
-      password: "",
-      emailError: "",
-      passwordError: "",
-      nameError: "",
-      lastnameError: "",
-      image: null,
-      imageError: ""
+  state = {
+    user_id: "",
+    date: "",
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    emailError: "",
+    passwordError: "",
+    nameError: "",
+    lastnameError: "",
+    image: null,
+    imageError: "",
+    image2Cloudinary: "",
   };
 
   handleChange = (event) => {
@@ -28,14 +29,13 @@ class RegisterModal extends Component {
     });
   };
 
-  
-
-  fileSelectedHandler = event => {
-    console.log(event.target.files[0])
+  fileSelectedHandler = (event) => {
+    console.log(event.target.files[0]);
     this.setState({
-      image: event.target.files[0]
-    })
-  }
+      image: event.target.files[0],
+      image2Cloudinary: event.target.files[0],
+    });
+  };
 
   validate = () => {
     // let passwordError=""
@@ -44,7 +44,8 @@ class RegisterModal extends Component {
     let emailError = "";
     let nameError = "";
     let lastnameError = "";
-    let imageError = ""
+    let imageError = "";
+    let image2CloudinaryError = "";
 
     if (!this.state.email || !this.state.email.includes("@")) {
       emailError = "Invalid email";
@@ -62,12 +63,31 @@ class RegisterModal extends Component {
       lastnameError = "Last Name can't be empty.";
     }
 
-    if(this.state.image === null) {
-      imageError = "You need to upload a \"legal document\" *wink wink* PS: Please a fake document "
+    if (this.state.image === null) {
+      imageError =
+        'You need to upload a "legal document" *wink wink* PS: Please a fake document ';
     }
 
-    if (emailError || passwordError || nameError || lastnameError || imageError) {
-      this.setState({ emailError, passwordError, nameError, lastnameError, imageError });
+    if (this.state.image2Cloudinary === "") {
+      image2CloudinaryError =
+        'You need to upload a "legal document" *wink wink* PS: Please a fake document ';
+    }
+
+    if (
+      emailError ||
+      passwordError ||
+      nameError ||
+      lastnameError ||
+      imageError ||
+      image2CloudinaryError
+    ) {
+      this.setState({
+        emailError,
+        passwordError,
+        nameError,
+        lastnameError,
+        imageError,
+      });
       isValid = false;
     }
 
@@ -76,17 +96,20 @@ class RegisterModal extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-   
     if (this.validate()) {
       console.log(this.state);
-      console.log(this.state);
-      console.log(this.state.image)
+      console.log(this.state.image);
+      console.log(this.state.image2Cloudinary);
 
-      var body = new FormData();
-      body.append("picture[attachment]", this.state.image);
-      for (var pair of body.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
+      // var body = new FormData();
+      // body.append("picture[attachment]", this.state.image);
+      // for (var pair of body.entries()) {
+      //   console.log(pair[0] + ", " + pair[1]);
+      // }
+
+      const formData = new FormData();
+      formData.append("file", this.state.image2Cloudinary);
+      formData.append("upload_preset", "simple8Front");
 
       axios({
         method: "post",
@@ -97,43 +120,60 @@ class RegisterModal extends Component {
           lastname: this.state.lastname,
           email: this.state.email,
           password: this.state.password,
-        }
-      })
-      .then(response => {
+        },
+      }).then((response) => {
         if (response.data.error === "Error creating account") {
           alert("This emails is allready taken, please use another");
         }
-        console.log(response.data.user)
-        console.log(response.data)
+        console.log(response.data.user);
+        console.log(response.data);
         let finU = response.data.user;
-        console.log(finU)
+        console.log(finU);
         for (let key in finU) {
           if (key == "id") {
-            let uid = finU[key]
-            console.log(finU[key])
-            body.append("picture[user_id]", uid);
-          }
-        }
-        for (var pair of body.entries()) {
-          console.log(pair[0] + ", " + pair[1]);
-        }
-        fetch(
-          `${API_ROOT}/pictures.json`,
-          {
-            method: 'post',
-            body: body
-          }
-        )
-        .then((response) => response.json(),
-        )
+            let uid = finU[key];
+            console.log(finU[key]);
+            console.log(uid);
+            axios
+              .post(
+                "https://api.cloudinary.com/v1_1/dl4mlrpmw/image/upload",
+                formData
+              )
+              .then((Response) => {
+                let imageUrl = Response.data.url
+                axios({
+                  method: "put",
+                  responseType: "json",
+                  url: `${API_ROOT}/users/${uid}`,
+                  data: {
+                    imageurl: imageUrl,
+                                  
+                }
+              });
+            // body.append("picture[user_id]", uid);
+              })
+        }}
+        // for (var pair of body.entries()) {
+        //   console.log(pair[0] + ", " + pair[1]);
+        // }
+        // fetch(
+        //   `${API_ROOT}/pictures.json`,
+        //   {
+        //     method: 'post',
+        //     body: body
+        //   }
+        // )
+        // .then((response) => response.json(),
+        // )
+      // });
       })
-     
       this.setState({
         email: "",
         password: "",
         name: "",
         lastname: "",
         image: null,
+        image2Cloudinary: "",
       });
     }
   };
@@ -178,7 +218,6 @@ class RegisterModal extends Component {
             <h6 className="btn">Sign up for your account</h6>
           </div>
           <div className="modal-content">
-            
             <div className="row">
               <div className="input-field">
                 <input
@@ -197,7 +236,6 @@ class RegisterModal extends Component {
             </div>
           </div>
           <div className="modal-content">
-            
             <div className="row">
               <div className="input-field">
                 <input
@@ -214,7 +252,6 @@ class RegisterModal extends Component {
             </div>
           </div>
           <div className="modal-content">
-            
             <div className="row">
               <div className="input-field">
                 <input
@@ -233,7 +270,6 @@ class RegisterModal extends Component {
             </div>
           </div>
           <div className="modal-content">
-           
             <div className="row">
               <div className="input-field">
                 <input
@@ -251,12 +287,15 @@ class RegisterModal extends Component {
               </div>
             </div>
           </div>
-          <p>Please select a legal document(A FAKE ONE, THIS IS A STUDENT PROJECT)</p>
-          <input type="file"  onChange={this.fileSelectedHandler} />
+          <p>
+            Please select a legal document(A FAKE ONE, THIS IS A STUDENT
+            PROJECT)
+          </p>
+          <input type="file" onChange={this.fileSelectedHandler} />
           {this.state.imageError ? (
-                  <div className="error">{this.state.imageError}</div>
-                ) : null}
-          
+            <div className="error">{this.state.imageError}</div>
+          ) : null}
+
           <div className="modal-footer">
             <a
               className="modal-close waves-effect waves-green btn"

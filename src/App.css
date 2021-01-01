@@ -140,9 +140,9 @@ main {
   flex-direction: column;
 }
 
-.mFormCont{
+/* .mFormCont{
   position: sticky
-}
+} */
 
 #modal1{
   padding: 0;
@@ -156,7 +156,7 @@ main {
   margin: 0px 10px 0px 10px;
 }
 
-.dashB {
+/* .dashB {
   max-height: 90vh;
   overflow-y: auto
-}
+} */

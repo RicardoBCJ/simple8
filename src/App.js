@@ -9,7 +9,8 @@ import Home from "./components/Home";
 import Footer from "./components/layouts/Footer";
 import About from "./components/About";
 import Dashboard from "./components/Dashboard";
-import Pictures from './components/Pictures'
+import Pictures from './components/Pictures';
+import Images from './components/Images';
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/about" exact={true} component={About} />
           <Route path="/dashboard"  component={Dashboard} />
           <Route path="/pictures"  component={Pictures} />
+          <Route path="/images" component={Images} />
         </Switch>
       </main>
       <Footer />
