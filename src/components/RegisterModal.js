@@ -136,7 +136,7 @@ class RegisterModal extends Component {
             console.log(uid);
             axios
               .post(
-                "https://api.cloudinary.com/v1_1/dl4mlrpmw/image/upload",
+                *******************************,
                 formData
               )
               .then((Response) => {
